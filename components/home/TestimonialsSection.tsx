@@ -10,9 +10,9 @@ export function TestimonialsSection() {
     <section className="section-padding bg-slate-50">
       <Container>
         <SectionHeading
-          eyebrow="Learner Reviews"
-          title="Real results from real learners"
-          description="Join thousands of professionals who have leveled up their AI skills and advanced their careers with NextSkill AI."
+          eyebrow="What Learners Say"
+          title="Real people, real results"
+          description="From office workers to retirees — here is what everyday people say after learning AI with NextSkill AI."
           className="mb-12"
         />
 
@@ -31,7 +31,7 @@ export function TestimonialsSection() {
             ))}
           </div>
           <p className="text-sm text-slate-500">
-            <span className="font-semibold text-slate-900">4.9 out of 5</span> — based on 3,800+ reviews
+            <span className="font-semibold text-slate-900">4.8 out of 5</span> — based on 18,400+ reviews
           </p>
         </div>
       </Container>

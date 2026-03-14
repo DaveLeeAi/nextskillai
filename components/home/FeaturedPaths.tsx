@@ -10,9 +10,9 @@ export function FeaturedPaths() {
     <section className="section-padding bg-white">
       <Container>
         <SectionHeading
-          eyebrow="Learning Paths"
-          title="Guided paths to real AI skills"
-          description="Each path is a structured curriculum built by experts — with clear milestones, adaptive quizzes, and an AI tutor that keeps you moving."
+          eyebrow="Popular Paths"
+          title="Start with a path made for beginners"
+          description="Each path is a short, step-by-step journey through a topic — with clear lessons, simple language, and no prior knowledge required."
           className="mb-12"
         />
 
@@ -27,7 +27,7 @@ export function FeaturedPaths() {
             href="/paths"
             className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-brand-600 border border-brand-200 hover:bg-brand-50 rounded-xl transition-colors"
           >
-            Browse All Learning Paths
+            See All Learning Paths
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

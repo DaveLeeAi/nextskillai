@@ -8,9 +8,9 @@ export function PlatformFeatures() {
     <section className="section-padding bg-white">
       <Container>
         <SectionHeading
-          eyebrow="Platform Features"
-          title="Everything you need to learn effectively"
-          description="NextSkill AI combines the structure of a great curriculum with the personalization of a private tutor — designed to help you actually finish what you start."
+          eyebrow="Why It Works"
+          title="Designed to make learning feel easy"
+          description="Everything about NextSkill AI is built around one idea: making it as simple as possible for everyday people to learn AI and actually use it in their lives."
           className="mb-12"
         />
 

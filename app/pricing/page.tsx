@@ -3,51 +3,49 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { SiteLayout } from '@/components/layout/SiteLayout';
+import { Container } from '@/components/layout/Container';
 import { SectionHeading } from '@/components/shared/SectionHeading';
-import { PricingCard } from '@/components/shared/PricingCard';
 import { FAQAccordion } from '@/components/shared/FAQAccordion';
 import {
   pricingTiers,
-  pricingFeatures,
   faqItems,
-  starterFeatures,
+  freeFeatures,
+  plusFeatures,
   proFeatures,
-  teamsFeatures,
 } from '@/lib/data/pricing';
-import { CircleCheck as CheckCircle2, Minus, Shield, Zap, Star, Users, ArrowRight } from 'lucide-react';
+import { Check, Shield, Zap, Star, Users, ArrowRight } from 'lucide-react';
 
 const featureListByTier = {
-  starter: starterFeatures,
+  free: freeFeatures,
+  plus: plusFeatures,
   pro: proFeatures,
-  teams: teamsFeatures,
 };
 
 export default function PricingPage() {
-  const [yearly, setYearly] = useState(true);
+  const [yearly, setYearly] = useState(false);
 
   return (
     <SiteLayout>
-      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-600/10 rounded-full blur-3xl" />
-        </div>
-        <div className="container-ns relative text-center">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-600/15 border border-brand-500/30 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-5">
-            Pricing
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight max-w-3xl mx-auto mb-5">
-            Simple pricing,{' '}
-            <span className="brand-gradient bg-clip-text text-transparent">no surprises</span>
+      <section className="pt-28 pb-16 md:pt-36 md:pb-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-50/80 rounded-full blur-3xl pointer-events-none" />
+        <Container className="relative text-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-xs font-semibold text-brand-700 mb-5">
+            Simple, honest pricing
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight max-w-2xl mx-auto mb-4">
+            Start free.{' '}
+            <span className="brand-gradient-text">Upgrade when you are ready.</span>
           </h1>
-          <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10">
-            Start free, upgrade when you are ready. Cancel any time. No hidden fees.
+          <p className="text-lg text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed">
+            No credit card needed to start. No tricks. No hidden fees.
+            Just straightforward plans that grow with you.
           </p>
 
-          <div className="inline-flex items-center gap-1.5 p-1.5 bg-slate-900 border border-slate-800 rounded-xl">
+          <div className="inline-flex items-center gap-1 p-1.5 bg-white border border-slate-200 rounded-xl shadow-sm">
             <button
               onClick={() => setYearly(false)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                !yearly ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'
+                !yearly ? 'bg-slate-100 text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
               Monthly
@@ -55,145 +53,166 @@ export default function PricingPage() {
             <button
               onClick={() => setYearly(true)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                yearly ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'
+                yearly ? 'bg-slate-100 text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
               Yearly
-              <span className="text-xs px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 font-semibold">
-                Save 35%
+              <span className="text-xs px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 font-semibold">
+                Save 33%
               </span>
             </button>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="pb-20 bg-slate-950">
-        <div className="container-ns">
+      <section className="pb-20 bg-white">
+        <Container>
           <div className="grid md:grid-cols-3 gap-6 items-start max-w-5xl mx-auto">
-            {pricingTiers.map((tier) => (
-              <PricingCard
-                key={tier.id}
-                tier={tier}
-                yearly={yearly}
-                features={featureListByTier[tier.id]}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+            {pricingTiers.map(tier => {
+              const price = yearly ? tier.yearlyPrice : tier.monthlyPrice;
+              const isFree = price === 0;
+              const features = featureListByTier[tier.id];
 
-      <section className="py-20 md:py-28 bg-slate-900/30 border-y border-slate-800">
-        <div className="container-ns">
-          <div className="text-center mb-12">
-            <SectionHeading
-              eyebrow="Feature comparison"
-              title="See exactly what you get"
-              description="A clear breakdown of every feature across all plans."
-              align="center"
-              titleClassName="text-white"
-            />
-          </div>
-          <div className="max-w-4xl mx-auto overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-slate-800">
-                  <th className="text-left py-4 pr-6 text-sm font-semibold text-slate-400 w-1/2">Feature</th>
-                  {pricingTiers.map((tier) => (
-                    <th
-                      key={tier.id}
-                      className={`py-4 px-4 text-center text-sm font-bold ${tier.highlighted ? 'text-brand-400' : 'text-white'}`}
-                    >
+              return (
+                <div
+                  key={tier.id}
+                  className={`relative flex flex-col rounded-2xl overflow-hidden transition-all duration-200 ${
+                    tier.highlighted
+                      ? 'bg-brand-600 border-2 border-brand-500 shadow-xl shadow-brand-200/50 scale-105 z-10'
+                      : 'bg-white border border-slate-200 shadow-sm hover:shadow-md'
+                  }`}
+                >
+                  {tier.badge && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <span className="inline-block px-4 py-1.5 rounded-full bg-amber-400 text-slate-900 text-xs font-bold shadow-sm">
+                        {tier.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className={`p-7 ${tier.badge ? 'pt-10' : ''}`}>
+                    <h3 className={`font-bold text-xl mb-1 ${tier.highlighted ? 'text-white' : 'text-slate-900'}`}>
                       {tier.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {pricingFeatures.map((feature, i) => (
-                  <tr key={i} className="border-b border-slate-800/60 hover:bg-slate-900/40 transition-colors">
-                    <td className="py-3.5 pr-6 text-sm text-slate-300">{feature.label}</td>
-                    {(['starter', 'pro', 'teams'] as const).map((tierId) => {
-                      const val = feature[tierId];
-                      return (
-                        <td key={tierId} className="py-3.5 px-4 text-center">
-                          {val === true ? (
-                            <CheckCircle2 className="w-4 h-4 text-teal-500 mx-auto" />
-                          ) : val === false ? (
-                            <Minus className="w-4 h-4 text-slate-700 mx-auto" />
-                          ) : (
-                            <span className="text-xs text-slate-400">{String(val)}</span>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </h3>
+                    <p className={`text-sm mb-6 leading-relaxed ${tier.highlighted ? 'text-brand-100' : 'text-slate-500'}`}>
+                      {tier.description}
+                    </p>
+
+                    <div className="mb-6">
+                      {isFree ? (
+                        <span className={`text-4xl font-bold ${tier.highlighted ? 'text-white' : 'text-slate-900'}`}>Free</span>
+                      ) : (
+                        <div className="flex items-end gap-1">
+                          <span className={`text-lg font-semibold ${tier.highlighted ? 'text-brand-100' : 'text-slate-400'}`}>$</span>
+                          <span className={`text-4xl font-bold leading-none ${tier.highlighted ? 'text-white' : 'text-slate-900'}`}>{price}</span>
+                          <span className={`text-sm pb-1 ${tier.highlighted ? 'text-brand-200' : 'text-slate-400'}`}>
+                            /month{yearly ? ', billed yearly' : ''}
+                          </span>
+                        </div>
+                      )}
+                      {!isFree && yearly && (
+                        <p className={`text-xs mt-1.5 ${tier.highlighted ? 'text-brand-200' : 'text-slate-400'}`}>
+                          Save ${(tier.monthlyPrice - tier.yearlyPrice) * 12} per year
+                        </p>
+                      )}
+                    </div>
+
+                    <Link
+                      href="/get-started"
+                      className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                        tier.highlighted
+                          ? 'bg-white text-brand-700 hover:bg-brand-50 shadow-sm'
+                          : 'bg-brand-600 hover:bg-brand-700 text-white'
+                      }`}
+                    >
+                      {tier.cta}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
+                  <div className={`px-7 pb-7 border-t ${tier.highlighted ? 'border-brand-500/40' : 'border-slate-100'}`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wider mt-5 mb-4 ${tier.highlighted ? 'text-brand-200' : 'text-slate-400'}`}>
+                      What is included
+                    </p>
+                    <ul className="space-y-3">
+                      {features.map(feature => (
+                        <li key={feature} className="flex items-start gap-2.5">
+                          <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${tier.highlighted ? 'text-brand-200' : 'text-teal-500'}`} />
+                          <span className={`text-sm ${tier.highlighted ? 'text-brand-100' : 'text-slate-600'}`}>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+            <span className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-teal-500" />14-day free trial</span>
+            <span className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-brand-500" />Cancel any time</span>
+            <span className="flex items-center gap-1.5"><Star className="w-4 h-4 text-amber-400 fill-amber-400" />4.8/5 learner rating</span>
+            <span className="flex items-center gap-1.5"><Users className="w-4 h-4 text-slate-400" />28,000+ learners</span>
+          </div>
+        </Container>
       </section>
 
-      <section className="py-20 md:py-28 bg-slate-950">
-        <div className="container-ns">
-          <div className="grid md:grid-cols-2 gap-16 items-start max-w-4xl mx-auto">
+      <section className="py-16 md:py-20 bg-slate-50/50 border-y border-slate-100">
+        <Container>
+          <div className="grid md:grid-cols-2 gap-14 items-start max-w-4xl mx-auto">
             <div>
               <SectionHeading
-                eyebrow="FAQ"
-                title="Questions answered"
-                description="Everything you need to know about plans, billing, and how it all works."
+                eyebrow="Common questions"
+                title="Everything you need to know"
+                description="Simple answers to the questions people ask before they sign up."
                 align="left"
-                titleClassName="text-white"
               />
-              <div className="mt-8 flex flex-col gap-4">
-                <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <Shield className="w-5 h-5 text-teal-500 flex-shrink-0" />
-                  14-day free trial on Pro &amp; Teams
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <Zap className="w-5 h-5 text-brand-400 flex-shrink-0" />
-                  Cancel any time, no questions asked
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <Star className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                  4.9/5 average learner satisfaction
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <Users className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                  50,000+ active learners trust us
-                </div>
+              <div className="mt-8 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                {[
+                  { icon: Shield, color: 'text-teal-500', text: '14-day free trial on Plus and Pro' },
+                  { icon: Zap, color: 'text-brand-500', text: 'Cancel any time, no questions asked' },
+                  { icon: Star, color: 'text-amber-500', text: '4.8/5 average learner satisfaction' },
+                  { icon: Users, color: 'text-slate-500', text: '28,000+ active learners trust us' },
+                ].map(({ icon: Icon, color, text }) => (
+                  <div key={text} className="flex items-center gap-3 text-sm text-slate-500">
+                    <Icon className={`w-4 h-4 flex-shrink-0 ${color}`} />
+                    {text}
+                  </div>
+                ))}
               </div>
             </div>
             <FAQAccordion items={faqItems} />
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
-        <div className="container-ns text-center">
-          <SectionHeading
-            eyebrow="Still deciding?"
-            title="Start free, upgrade when ready"
-            description="No credit card required. Your free account never expires. Upgrade to Pro whenever it makes sense for you."
-            align="center"
-            titleClassName="text-white"
-          />
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/get-started"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-600/30"
-            >
-              Get started free
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/reviews"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
-            >
-              Read learner stories
-            </Link>
+      <section className="py-16 md:py-20 bg-gradient-to-br from-brand-600 to-brand-700">
+        <Container>
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Still deciding? Start free today.
+            </h2>
+            <p className="text-brand-100 text-lg leading-relaxed mb-8">
+              Your free account never expires. Try the lessons, see if you like it, and upgrade whenever you are ready.
+              No pressure, no commitment.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/get-started"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors shadow-sm"
+              >
+                Start for free
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-brand-700/50 border border-brand-500/50 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors"
+              >
+                Read learner stories
+              </Link>
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
     </SiteLayout>
   );

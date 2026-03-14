@@ -1,4 +1,4 @@
-import { Bot, Map, Clock, SquareCheck as CheckSquare, Award, TrendingUp, Sparkles, BrainCircuit, ChartBar as BarChart2, MessageSquare, ChartLine as LineChart, Trophy, Compass, BookOpen, FlaskConical } from 'lucide-react';
+import { Bot, Map, Clock, SquareCheck as CheckSquare, Award, TrendingUp, Sparkles, BrainCircuit, ChartBar as BarChart2, MessageSquare, ChartLine as LineChart, Trophy, Compass, BookOpen, FlaskConical, Star, CircleCheck as CheckCircle, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Feature } from '@/lib/types';
 
@@ -6,6 +6,7 @@ const iconMap: Record<string, React.ElementType> = {
   Bot, Map, Clock, CheckSquare, Award, TrendingUp,
   Sparkles, BrainCircuit, BarChart2, MessageSquare,
   LineChart, Trophy, Compass, BookOpen, FlaskConical,
+  Star, CheckCircle, Zap,
 };
 
 interface FeatureCardProps {

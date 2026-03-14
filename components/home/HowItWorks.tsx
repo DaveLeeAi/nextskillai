@@ -15,8 +15,8 @@ export function HowItWorks() {
       <Container>
         <SectionHeading
           eyebrow="How It Works"
-          title="Four steps from curious to capable"
-          description="A clear, proven system designed to maximize learning efficiency and make every session count."
+          title="Four simple steps to a real new skill"
+          description="We have made the learning process as simple and stress-free as possible. No overwhelm, no confusion — just steady progress one step at a time."
           className="mb-16"
         />
 

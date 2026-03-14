@@ -1,7 +1,7 @@
 import { Container } from '@/components/layout/Container';
 import { trustStats } from '@/lib/data/homepage';
 
-const companyNames = ['Stripe', 'Vercel', 'Notion', 'Figma', 'Linear', 'Loom'];
+const backgrounds = ['Office workers', 'Teachers', 'Freelancers', 'Students', 'Retirees', 'Small business owners'];
 
 export function TrustedSection() {
   return (
@@ -18,10 +18,10 @@ export function TrustedSection() {
 
         <div className="border-t border-slate-200 pt-10">
           <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-8">
-            Trusted by learners from leading companies
+            Loved by people from all walks of life
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            {companyNames.map((name) => (
+            {backgrounds.map((name) => (
               <span
                 key={name}
                 className="text-base font-bold text-slate-300 hover:text-slate-400 transition-colors select-none"

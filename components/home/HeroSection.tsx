@@ -3,9 +3,9 @@ import { ArrowRight, Play, CircleCheck as CheckCircle2, Sparkles, TrendingUp, Bo
 import { Container } from '@/components/layout/Container';
 
 const heroTrustPoints = [
-  'No credit card required',
-  'Cancel anytime',
-  'Learn at your own pace',
+  'No experience needed',
+  'Free to start — no credit card',
+  'Just 10 minutes a day',
 ];
 
 export function HeroSection() {
@@ -19,17 +19,17 @@ export function HeroSection() {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-xs font-semibold text-brand-700 mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              AI-Powered Learning Platform
+              Built for complete beginners
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
-              Master AI Skills{' '}
-              <span className="brand-gradient-text">That Actually</span>{' '}
-              Matter
+              Learn AI without{' '}
+              <span className="brand-gradient-text">feeling lost</span>
             </h1>
 
             <p className="text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
-              Guided learning paths, a personal AI tutor, and bite-sized lessons designed to take you from curious to career-ready — faster than you thought possible.
+              Simple, plain-English lessons for everyday people — not tech experts.
+              Start using AI in real life in just 10 minutes a day, no experience needed.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
@@ -45,7 +45,7 @@ export function HeroSection() {
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 rounded-xl transition-colors"
               >
                 <Play className="w-4 h-4 text-slate-400" />
-                Explore Paths
+                See learning paths
               </Link>
             </div>
 
@@ -77,11 +77,11 @@ function HeroDashboardMock() {
         <div className="flex items-center justify-between mb-1">
           <div>
             <p className="text-xs text-slate-400 font-medium">Currently Learning</p>
-            <p className="text-sm font-semibold text-slate-900 mt-0.5">AI Fundamentals · Week 3</p>
+            <p className="text-sm font-semibold text-slate-900 mt-0.5">First Steps with AI · Day 4</p>
           </div>
           <span className="flex items-center gap-1 text-xs font-semibold text-teal-600 bg-teal-50 border border-teal-100 px-2.5 py-1 rounded-full">
             <Zap className="w-3 h-3" />
-            On Track
+            On a roll!
           </span>
         </div>
 
@@ -97,9 +97,9 @@ function HeroDashboardMock() {
 
         <div className="grid grid-cols-3 gap-2 pt-1">
           {[
-            { icon: BookOpen, label: 'Lessons', value: '16/24' },
-            { icon: CheckCircle2, label: 'Quizzes', value: '12/18' },
-            { icon: TrendingUp, label: 'Streak', value: '9 days' },
+            { icon: BookOpen, label: 'Lessons', value: '4/6' },
+            { icon: CheckCircle2, label: 'Activities', value: '4/6' },
+            { icon: TrendingUp, label: 'Streak', value: '4 days' },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex flex-col items-center p-3 bg-slate-50 rounded-xl">
               <Icon className="w-4 h-4 text-brand-500 mb-1.5" />
@@ -116,21 +116,21 @@ function HeroDashboardMock() {
             <Sparkles className="w-4 h-4 text-brand-600" />
           </div>
           <div>
-            <p className="text-xs font-semibold text-slate-900 leading-tight">AI Tutor Tip</p>
+            <p className="text-xs font-semibold text-slate-900 leading-tight">Quick tip</p>
             <p className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-              You&apos;re close to mastering neural nets. Try the practice exercise!
+              Try asking ChatGPT to explain something in simple terms. It works great!
             </p>
           </div>
         </div>
       </div>
 
       <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl border border-slate-200 shadow-card-md p-4 w-52">
-        <p className="text-xs font-semibold text-slate-700 mb-2">Skill Growth</p>
+        <p className="text-xs font-semibold text-slate-700 mb-2">Skills Growing</p>
         <div className="space-y-1.5">
           {[
-            { label: 'ML Concepts',  pct: 82 },
-            { label: 'Python',       pct: 74 },
-            { label: 'Data Skills',  pct: 61 },
+            { label: 'Writing Emails',  pct: 82 },
+            { label: 'Using ChatGPT',   pct: 74 },
+            { label: 'Daily Planning',  pct: 61 },
           ].map(({ label, pct }) => (
             <div key={label}>
               <div className="flex justify-between text-2xs text-slate-400 mb-0.5">
