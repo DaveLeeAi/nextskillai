@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { User, Bell, Target, CreditCard, Award, CircleCheck as CheckCircle2, ChevronRight, Zap, Flame, BookOpen, Mail, Calendar, CreditCard as Edit2 } from 'lucide-react';
+import { User, Bell, Target, CreditCard, Award, CircleCheck as CheckCircle2, ChevronRight, Zap, Flame, BookOpen, Mail, Calendar, Pencil as Edit2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { mockUser, milestones } from '@/lib/data/learner';
 
