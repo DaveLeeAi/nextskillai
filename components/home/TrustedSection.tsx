@@ -1,31 +1,28 @@
 import { Container } from '@/components/layout/Container';
 import { trustStats } from '@/lib/data/homepage';
 
-const backgrounds = ['Office workers', 'Teachers', 'Freelancers', 'Students', 'Retirees', 'Small business owners'];
+const audiences = ['Office workers', 'Teachers', 'Freelancers', 'Students', 'Retirees', 'Small business owners'];
 
 export function TrustedSection() {
   return (
-    <section className="py-14 border-y border-slate-100 bg-slate-50">
+    <section className="section-padding-sm border-y border-slate-100 bg-slate-50">
       <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-6 mb-8">
           {trustStats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-3xl font-bold text-slate-900 tracking-tight">{stat.value}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">{stat.value}</p>
               <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
 
-        <div className="border-t border-slate-200 pt-10">
-          <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-8">
+        <div className="border-t border-slate-200 pt-7">
+          <p className="text-center text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-5">
             Loved by people from all walks of life
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            {backgrounds.map((name) => (
-              <span
-                key={name}
-                className="text-base font-bold text-slate-300 hover:text-slate-400 transition-colors select-none"
-              >
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-7">
+            {audiences.map((name) => (
+              <span key={name} className="text-sm font-semibold text-slate-300 select-none">
                 {name}
               </span>
             ))}

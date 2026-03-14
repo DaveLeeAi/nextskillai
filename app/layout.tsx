@@ -11,21 +11,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://nextskillai.com'),
   title: {
-    default: 'NextSkill AI — AI-Powered Learning Platform',
+    default: 'NextSkill AI — Learn AI Without the Overwhelm',
     template: '%s · NextSkill AI',
   },
   description:
-    'Master practical AI skills through guided learning paths, a personal AI tutor, and bite-sized lessons designed for real career growth.',
-  keywords: ['AI learning', 'machine learning courses', 'prompt engineering', 'data science', 'online education'],
+    'Plain-English AI lessons for everyday people. Build practical AI skills in just 10 minutes a day — no technical background needed.',
+  keywords: ['AI for beginners', 'learn ChatGPT', 'AI lessons', 'everyday AI', 'AI for work', 'beginner AI course'],
   openGraph: {
-    title: 'NextSkill AI — AI-Powered Learning Platform',
-    description: 'Master practical AI skills through guided learning paths and personalized AI coaching.',
+    title: 'NextSkill AI — Learn AI Without the Overwhelm',
+    description: 'Plain-English AI lessons for everyday people. Start using AI in minutes a day, no experience needed.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NextSkill AI — AI-Powered Learning Platform',
-    description: 'Master practical AI skills through guided learning paths and personalized AI coaching.',
+    title: 'NextSkill AI — Learn AI Without the Overwhelm',
+    description: 'Plain-English AI lessons for everyday people. Start using AI in minutes a day, no experience needed.',
   },
 };
 

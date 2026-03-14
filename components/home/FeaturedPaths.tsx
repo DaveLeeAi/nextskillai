@@ -11,23 +11,23 @@ export function FeaturedPaths() {
       <Container>
         <SectionHeading
           eyebrow="Popular Paths"
-          title="Start with a path made for beginners"
-          description="Each path is a short, step-by-step journey through a topic — with clear lessons, simple language, and no prior knowledge required."
-          className="mb-12"
+          title="Start with a path built for beginners"
+          description="Each path is a short, guided journey — with simple lessons, plain language, and no prior knowledge required."
+          className="mb-10"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {featuredPaths.map((path) => (
             <PathCard key={path.id} path={path} />
           ))}
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8">
           <Link
             href="/paths"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-brand-600 border border-brand-200 hover:bg-brand-50 rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-brand-600 border border-brand-200 hover:bg-brand-50 rounded-xl transition-colors"
           >
-            See All Learning Paths
+            See all learning paths
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

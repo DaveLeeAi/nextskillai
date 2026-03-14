@@ -9,12 +9,12 @@ export function PlatformFeatures() {
       <Container>
         <SectionHeading
           eyebrow="Why It Works"
-          title="Designed to make learning feel easy"
-          description="Everything about NextSkill AI is built around one idea: making it as simple as possible for everyday people to learn AI and actually use it in their lives."
-          className="mb-12"
+          title="Everything designed to feel easy"
+          description="We built NextSkill AI around one idea: making it as simple as possible for everyday people to learn AI and actually use it."
+          className="mb-10"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature) => (
             <FeatureCard key={feature.id} feature={feature} />
           ))}
