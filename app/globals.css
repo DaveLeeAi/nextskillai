@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 7%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 96%;
+    --muted-foreground: 215 20% 45%;
+    --accent: 174 72% 32%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.625rem;
+
+    --chart-1: 221 83% 53%;
+    --chart-2: 174 72% 32%;
+    --chart-3: 43 74% 66%;
+    --chart-4: 27 87% 67%;
+    --chart-5: 340 75% 55%;
+
+    --ns-brand: #2563eb;
+    --ns-brand-light: #dbeafe;
+    --ns-teal: #0d9488;
+    --ns-teal-light: #ccfbf1;
+    --ns-surface: #f8fafc;
+    --ns-surface-2: #f1f5f9;
+    --ns-border: #e2e8f0;
+    --ns-text: #0f172a;
+    --ns-text-muted: #64748b;
+    --ns-text-subtle: #94a3b8;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white text-slate-900 font-sans;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-ns {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .section-padding-sm {
+    @apply py-12 md:py-16;
+  }
+
+  .brand-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  }
+
+  .brand-gradient-text {
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-card-md hover:-translate-y-0.5;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2;
+  }
+}
