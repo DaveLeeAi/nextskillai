@@ -34,6 +34,7 @@ import { AiTutorPanel } from '@/components/lesson/AiTutorPanel';
 import { NotesDrawer } from '@/components/lesson/NotesDrawer';
 import { chatgptPathLessons } from '@/lib/data/learner';
 import { fullLessonData, chatgptPathModules } from '@/lib/data/lessons';
+import { lessonMap } from '@/lib/data/lessonContent';
 import type { LessonBlock } from '@/lib/data/lessons';
 
 function renderBlock(block: LessonBlock, index: number) {
@@ -57,7 +58,7 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
   const [bookmarked, setBookmarked] = useState(false);
   const [panel, setPanel] = useState<PanelMode>('none');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const lesson = fullLessonData;
+  const lesson = lessonMap[params.slug] ?? fullLessonData;
 
   const togglePanel = (mode: PanelMode) => {
     setPanel((prev) => (prev === mode ? 'none' : mode));
