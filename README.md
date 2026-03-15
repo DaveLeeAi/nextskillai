@@ -2,7 +2,67 @@
 
 > AI-powered education platform for practical skill building.
 
-NextSkill AI is a modern, production-grade edtech platform that helps beginners master AI tools through guided learning paths, bite-sized lessons, adaptive quizzes, and a personal AI tutor.
+NextSkill AI is a modern, production-grade edtech platform that helps beginners master AI tools through guided learning paths, bite-sized lessons, adaptive quizzes, and a personal AI tutor. The platform supports learners across three tiers — Beginner, Intermediate, and Advanced — with a full catalog of 2026-relevant content.
+
+---
+
+## Layer 12 — Advanced Content Pass + Full Beginner Expansion
+
+Two-pass content expansion delivering a complete multi-tier curriculum.
+
+### Pass 1 — Additive Advanced Content Pass
+
+Added a full advanced/intermediate tier alongside the existing beginner platform. All existing content preserved exactly.
+
+| Item | Added |
+|---|---|
+| New advanced learning paths | **8** |
+| New advanced courses | **20** |
+| New advanced opening lessons | **8** |
+| New UI components | **2** (AdvancedPathCard, AdvancedCourseCard) |
+
+**New Advanced Paths:**
+
+| Path | Level | Slug |
+|---|---|---|
+| AI Agents and Modern Workflows | Advanced | `ai-agents-modern-workflows` |
+| Advanced Prompting for Reliable Output | Advanced | `advanced-prompting-reliable-output` |
+| AI Research and Synthesis Workflows | Intermediate | `ai-research-synthesis-workflows` |
+| Multimodal AI for Real Work | Intermediate | `multimodal-ai-real-work` |
+| Evaluating AI Output and Reducing Mistakes | Advanced | `evaluating-ai-output-reducing-mistakes` |
+| AI Automation for Knowledge Workers | Advanced | `ai-automation-knowledge-workers` |
+| MCP: Tool-Connected AI Basics | Intermediate | `mcp-tool-connected-ai-basics` |
+| Practical AI Systems for Teams | Advanced | `practical-ai-systems-for-teams` |
+
+**UI updates:** `/paths` page gained an Advanced section with anchor navigation and tier badges. `/courses` page gained a Beginner/Advanced toggle.
+
+---
+
+### Pass 2 — Full Content Depth Expansion
+
+Full lesson sets for all 8 advanced paths plus new beginner path content. Every lesson is unique with a distinct learning outcome and no redundancy.
+
+**Advanced path lesson totals (after expansion):**
+
+| Path | Lessons |
+|---|---|
+| AI Agents | 8 |
+| Advanced Prompting | 7 |
+| Evaluating AI Output | 5 |
+| MCP | 4 |
+| Research Synthesis | 4 |
+| Multimodal AI | 3 |
+| AI Automation | 3 |
+| Practical AI for Teams | 3 |
+
+**New beginner path content:**
+
+| Path | New Lessons |
+|---|---|
+| AI Writing Basics | 6 (intro, emails, tone/style, social posts, editing, quiz) |
+| AI for Work Essentials | 6 (intro, work communication, meeting summaries, project planning, research/summaries, quiz) |
+
+**Module definitions added** for all 8 advanced paths in `lessons.ts` (evaluation, MCP, research, multimodal, automation, teams — completing the set started in Pass 1).
 
 ---
 
