@@ -322,6 +322,150 @@ export const advancedPromptingModules: PathModule[] = [
   },
 ];
 
+export const evaluationPathModules: PathModule[] = [
+  {
+    id: 'eval-mod1',
+    title: 'Recognizing AI Failures',
+    description: 'Identify hallucinations, biases, and confident-but-wrong output',
+    lessonIds: ['ev1', 'ev2'],
+    milestoneId: 'evm1',
+  },
+  {
+    id: 'eval-mod2',
+    title: 'Quality Control Frameworks',
+    description: 'Build systematic processes for verifying AI work',
+    lessonIds: ['ev3', 'ev4'],
+    milestoneId: 'evm2',
+  },
+  {
+    id: 'eval-mod3',
+    title: 'Trust Calibration',
+    description: 'Know when to trust AI fully, partially, or not at all',
+    lessonIds: ['ev5', 'ev6', 'ev7'],
+    milestoneId: 'evm3',
+  },
+];
+
+export const mcpPathModules: PathModule[] = [
+  {
+    id: 'mcp-mod1',
+    title: 'MCP Foundations',
+    description: 'Understand what MCP is and why it matters for your work',
+    lessonIds: ['mc1', 'mc2'],
+    milestoneId: 'mcpm1',
+  },
+  {
+    id: 'mcp-mod2',
+    title: 'Connecting Tools',
+    description: 'Link AI to files, apps, and data sources safely',
+    lessonIds: ['mc3', 'mc4'],
+    milestoneId: 'mcpm2',
+  },
+  {
+    id: 'mcp-mod3',
+    title: 'Security and Control',
+    description: 'Manage permissions, access, and what AI can touch',
+    lessonIds: ['mc5', 'mc6', 'mc7'],
+    milestoneId: 'mcpm3',
+  },
+];
+
+export const researchPathModules: PathModule[] = [
+  {
+    id: 'research-mod1',
+    title: 'Research Foundations',
+    description: 'Set up AI-assisted research workflows that produce reliable results',
+    lessonIds: ['rs1', 'rs2'],
+    milestoneId: 'rsm1',
+  },
+  {
+    id: 'research-mod2',
+    title: 'Document and Source Analysis',
+    description: 'Analyze documents, extract insights, and verify claims',
+    lessonIds: ['rs3', 'rs4'],
+    milestoneId: 'rsm2',
+  },
+  {
+    id: 'research-mod3',
+    title: 'Synthesis and Reporting',
+    description: 'Combine multiple sources into structured, trustworthy outputs',
+    lessonIds: ['rs5', 'rs6', 'rs7'],
+    milestoneId: 'rsm3',
+  },
+];
+
+export const multimodalPathModules: PathModule[] = [
+  {
+    id: 'mm-mod1',
+    title: 'Multimodal Foundations',
+    description: 'Understand how AI processes images, documents, audio, and text together',
+    lessonIds: ['mm1', 'mm2'],
+    milestoneId: 'mmm1',
+  },
+  {
+    id: 'mm-mod2',
+    title: 'Document and Visual Analysis',
+    description: 'Analyze reports, charts, screenshots, and mixed-format files',
+    lessonIds: ['mm3', 'mm4'],
+    milestoneId: 'mmm2',
+  },
+  {
+    id: 'mm-mod3',
+    title: 'Practical Multimodal Workflows',
+    description: 'Build real workflows combining multiple input types',
+    lessonIds: ['mm5', 'mm6', 'mm7'],
+    milestoneId: 'mmm3',
+  },
+];
+
+export const automationPathModules: PathModule[] = [
+  {
+    id: 'auto-mod1',
+    title: 'Automation Foundations',
+    description: 'Map your work and identify what AI can automate',
+    lessonIds: ['au1', 'au2'],
+    milestoneId: 'aum1',
+  },
+  {
+    id: 'auto-mod2',
+    title: 'Building Workflows',
+    description: 'Create your first automated AI-assisted workflows',
+    lessonIds: ['au3', 'au4'],
+    milestoneId: 'aum2',
+  },
+  {
+    id: 'auto-mod3',
+    title: 'Reliability and Maintenance',
+    description: 'Keep automation working accurately over time',
+    lessonIds: ['au5', 'au6', 'au7'],
+    milestoneId: 'aum3',
+  },
+];
+
+export const teamsPathModules: PathModule[] = [
+  {
+    id: 'teams-mod1',
+    title: 'Team AI Foundations',
+    description: 'Understand the dynamics of rolling out AI across a team',
+    lessonIds: ['tm1', 'tm2'],
+    milestoneId: 'tmm1',
+  },
+  {
+    id: 'teams-mod2',
+    title: 'Shared Systems',
+    description: 'Build prompt libraries and shared workflows your team can use',
+    lessonIds: ['tm3', 'tm4'],
+    milestoneId: 'tmm2',
+  },
+  {
+    id: 'teams-mod3',
+    title: 'Culture and Governance',
+    description: 'Set standards, manage risk, and build an AI-positive culture',
+    lessonIds: ['tm5', 'tm6', 'tm7'],
+    milestoneId: 'tmm3',
+  },
+];
+
 export const recentLessons = [
   {
     id: 'rl1',
