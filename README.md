@@ -2,57 +2,104 @@
 
 > AI-powered education platform for practical skill building.
 
-NextSkill AI is a modern, production-grade edtech platform that helps learners master in-demand AI skills through guided learning paths, bite-sized lessons, adaptive quizzes, and a personal AI tutor.
+NextSkill AI is a modern, production-grade edtech platform that helps beginners master AI tools through guided learning paths, bite-sized lessons, adaptive quizzes, and a personal AI tutor.
 
 ---
 
-## Layer 1 — Foundation & Homepage Shell
+## Layer 10 — Content Expansion + Lesson Depth Overhaul
 
-This is the first layer of a phased build. It establishes the complete design system, global site shell, and fully designed public homepage.
+The platform content library has been significantly expanded to support launch credibility. The focus of this layer was educational substance: more paths, deeper lessons, stronger checkpoints, and a realistic beginner learning progression.
 
-### What's Included
+### Content Inventory (Before → After)
 
-**Design System**
-- Custom Tailwind config with brand blue + teal accent color ramps
-- Typography scale, spacing system, shadow variants, and gradient utilities
-- Global CSS tokens (`--ns-brand`, `--ns-teal`, etc.) for consistent theming
-- Inter font via Next.js `next/font/google`
+| Item | Before | After |
+|---|---|---|
+| Learning Paths | 5 | **12** |
+| Modules | 7 | **44** |
+| Lessons | 16 | **94** |
+| Lesson Blocks | 7 | **163** |
+| Checkpoints | 2 | **27** |
 
-**Global Site Shell**
-- Sticky `Navbar` with scroll-aware styling, active route links, and responsive mobile menu
-- Dark `Footer` with grouped link columns and social icons
-- `Container` layout primitive with consistent max-width and padding
-- `SiteLayout` wrapper combining Navbar + Footer
+### New Learning Paths Added
 
-**Reusable Shared Components**
-- `BrandBadge` — colored label chips (default, hot, new, success, info, warning)
-- `PathCard` — learning path preview card with icon, level badge, and hover state
-- `FeatureCard` — icon + title + description card for platform features
-- `TestimonialCard` — review card with avatar, rating stars, and featured variant
-- `SectionHeading` — centered heading block with label, title, and subtitle
-- `PlaceholderPage` — professional "coming soon" shell for future pages
+| Path | Audience | Status |
+|---|---|---|
+| AI Confidence Builder | Total beginners, nervous learners | Published |
+| AI for Work Essentials | Working professionals | Published |
+| AI for Email and Communication | Anyone who writes emails | Published |
+| Safe and Smart AI Use | Anyone using AI tools | Published |
+| AI for Study and Learning | Students, self-learners | Published |
+| AI for Job Seekers | Job seekers, career changers | Published |
+| AI for Small Business Basics | Small business owners, freelancers | Published |
 
-**Homepage Sections**
-| Section | Description |
-|---|---|
-| `HeroSection` | Headline, CTAs, and a styled mock learning dashboard visual |
-| `TrustedSection` | Trust stats + company name ticker bar |
-| `FeaturedPaths` | Six learning path cards in a responsive grid |
-| `HowItWorks` | Four-step numbered process |
-| `PlatformFeatures` | Six feature highlights in a 3-column grid |
-| `TestimonialsSection` | Three testimonials with a featured center card |
-| `CtaBanner` | Full-width brand gradient call-to-action |
+### Flagship Path Expansions
 
-**Routes**
-| Route | Status |
-|---|---|
-| `/` | Fully designed homepage |
-| `/courses` | Placeholder shell |
-| `/paths` | Placeholder shell |
-| `/pricing` | Placeholder shell |
-| `/reviews` | Placeholder shell |
-| `/signin` | Styled sign-in form (no auth yet) |
-| `/get-started` | Styled registration form (no auth yet) |
+- **Start Using AI** — expanded from 1 to 4 modules (12 lessons total)
+- **ChatGPT Beginner Path** — expanded from 4 to 5 modules
+- **Everyday AI Basics** — expanded from 2 to 4 modules
+
+### Lesson Depth
+
+Every key lesson now includes structured blocks:
+- Short intro / explainer
+- Key takeaway
+- Practical example (often a before/after or prompt example)
+- Checklist of use cases or habits
+- Practice task the learner can try immediately
+- Recap
+
+### Checkpoint Quality
+
+27 checkpoint questions across flagship lessons covering:
+- Multiple choice
+- True/false
+- Choose the better prompt (side-by-side comparison)
+- Reflection prompts
+
+### Learning Progression
+
+Lessons are sequenced from foundational to practical:
+- What is AI? → How AI thinks → What a prompt is → Weak vs strong prompts → Writing emails → Summarizing documents → Brainstorming → When AI gets it wrong → Safety and privacy
+
+---
+
+## Previous Layers
+
+### Layer 9 — Lesson Player + Admin Content Tools
+
+Full lesson reading experience with block-based content rendering, progress tracking, AI tutor panel, notes drawer, and checkpoint quizzes. Admin tools for managing lessons, paths, and content.
+
+### Layer 8 — Admin Panel
+
+Admin dashboard with user management, path management, lesson management, review moderation, featured content controls, and platform settings.
+
+### Layer 7 — Learner Dashboard
+
+Full learner app with enrolled path tracking, progress visualization, lesson continuation, profile management, and stat tracking.
+
+### Layer 6 — Pricing + Reviews Pages
+
+Public-facing pricing page with plan comparison, reviews page with filtering and star ratings.
+
+### Layer 5 — Courses + Paths Catalog
+
+Full public catalog pages for learning paths and courses with filtering, sorting, search, and card layouts.
+
+### Layer 4 — Supabase Database Schema
+
+Complete database schema covering users, paths, modules, lessons, lesson blocks, checkpoints, enrollments, progress, and reviews. Full RLS security on every table.
+
+### Layer 3 — Public Pages (Courses, Paths, Pricing, Reviews)
+
+Page shells with real data structures, section components, and realistic placeholder content.
+
+### Layer 2 — Auth (Supabase)
+
+Email/password authentication with sign-in, registration, protected routes, and session management.
+
+### Layer 1 — Foundation + Homepage
+
+Design system, global shell (Navbar, Footer), homepage sections, and base component library.
 
 ---
 
@@ -63,6 +110,8 @@ This is the first layer of a phased build. It establishes the complete design sy
 - **Styling**: Tailwind CSS + tailwindcss-animate
 - **Icons**: Lucide React
 - **UI Primitives**: shadcn/ui (Radix UI base)
+- **Database**: Supabase (PostgreSQL + RLS)
+- **Auth**: Supabase Auth (email/password)
 - **Font**: Inter via `next/font/google`
 
 ---
@@ -71,40 +120,34 @@ This is the first layer of a phased build. It establishes the complete design sy
 
 ```
 app/                    Next.js App Router pages
-  layout.tsx            Root layout with metadata and font
+  layout.tsx            Root layout
   page.tsx              Homepage
-  courses/              Placeholder
-  paths/                Placeholder
-  pricing/              Placeholder
-  reviews/              Placeholder
-  signin/               Sign-in form shell
-  get-started/          Registration form shell
+  admin/                Admin panel and sub-pages
+  app/                  Learner dashboard and sub-pages
+  courses/              Public course catalog
+  paths/                Public paths catalog
+  pricing/              Pricing page
+  reviews/              Reviews page
+  signin/               Sign-in
+  get-started/          Registration
 
 components/
   layout/               Navbar, Footer, Container, SiteLayout
-  home/                 One file per homepage section
+  home/                 Homepage sections
+  admin/                Admin panel components
+  app/                  Learner app components
+  lesson/               Lesson player components
   shared/               Reusable UI primitives
   ui/                   shadcn/ui base components
 
 lib/
-  data/homepage.ts      All homepage content (swappable)
+  data/                 Static content and mock data files
   types/index.ts        TypeScript interfaces
   utils.ts              cn() helper
+
+supabase/
+  functions/            Edge functions (if any)
 ```
-
----
-
-## Planned Layers
-
-| Layer | Focus |
-|---|---|
-| Layer 1 | Foundation, design system, homepage (current) |
-| Layer 2 | Auth (Supabase), sign-in, registration flows |
-| Layer 3 | Course catalog, learning paths, search & filtering |
-| Layer 4 | Lesson player, progress tracking, quizzes |
-| Layer 5 | Learner dashboard, certificates, streaks |
-| Layer 6 | Admin panel, content management |
-| Layer 7 | Billing, subscriptions, team plans |
 
 ---
 
