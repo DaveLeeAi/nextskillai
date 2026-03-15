@@ -92,7 +92,7 @@ export function CourseCard({ course, className }: CourseCardProps) {
         </div>
 
         <Link
-          href={`/courses/${course.id}`}
+          href={`/get-started`}
           className="inline-flex items-center justify-between w-full px-4 py-2.5 text-sm font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-xl transition-colors group/btn"
         >
           <span>Start lesson</span>
@@ -108,7 +108,7 @@ export function CourseCardCompact({ course, className }: CourseCardProps) {
 
   return (
     <Link
-      href={`/courses/${course.id}`}
+      href={`/get-started`}
       className={cn(
         'group flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 hover:border-brand-200 hover:shadow-sm transition-all',
         className

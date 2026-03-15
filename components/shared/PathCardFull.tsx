@@ -93,7 +93,7 @@ export function PathCardFull({ path }: PathCardFullProps) {
         <div className="pt-4 border-t border-slate-100">
           <p className="text-xs text-slate-400 mb-3">Best for: {path.forWho}</p>
           <Link
-            href={`/paths/${path.id}`}
+            href={`/get-started`}
             className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-50 hover:bg-brand-600 text-sm font-semibold text-brand-600 hover:text-white transition-all duration-200"
           >
             Start this path

@@ -995,4 +995,88 @@ export const lessonMap: Record<string, FullLesson> = {
       },
     ],
   },
+
+  'writing-emails-with-ai': {
+    slug: 'writing-emails-with-ai',
+    title: 'Writing Emails with AI',
+    pathTitle: 'Everyday AI Basics',
+    pathSlug: 'everyday-ai-basics',
+    duration: '7 min',
+    order: 1,
+    totalInPath: 15,
+    prevLesson: null,
+    nextLesson: null,
+    type: 'lesson',
+    blocks: [
+      {
+        type: 'text',
+        heading: 'Email is where AI saves the most time',
+        body: "For most people, email is the single biggest source of writing at work and in life. It is also where ChatGPT can save the most time — not by replacing your voice, but by handling the heavy lifting so you can focus on the message, not the wording.",
+      },
+      {
+        type: 'checklist',
+        title: 'What AI can do for your emails',
+        items: [
+          'Write a first draft from a short brief you provide',
+          'Improve the tone of something you already wrote',
+          'Make a long email shorter and clearer',
+          'Adjust formality — more professional or more casual',
+          'Soften an email that sounds too blunt',
+          'Write a polite follow-up when you have not heard back',
+          'Respond to a difficult email you are not sure how to handle',
+        ],
+      },
+      {
+        type: 'example',
+        label: 'A weak prompt vs a great one',
+        weak: 'Write an email to my boss.',
+        strong: 'Write a short, professional email to my manager letting her know I will be 30 minutes late to work tomorrow due to a doctor appointment. Keep it brief, apologetic, and end with reassurance that I will catch up on anything I miss.',
+      },
+      {
+        type: 'tip',
+        title: 'Give it the key facts, let it do the writing',
+        body: "You do not need to know what to say — just give ChatGPT the facts: who the email is for, what happened, what you need, and the tone you want. It handles the rest. Think of it as briefing a very capable assistant.",
+        variant: 'tip',
+      },
+      {
+        type: 'text',
+        heading: 'Adjust tone in one step',
+        body: "One of the most useful email tricks: paste any email you have written and ask ChatGPT to adjust the tone. Common adjustments include:\n\n- \"Make this warmer and less formal\"\n- \"This sounds a bit passive-aggressive — can you soften it?\"\n- \"Make this more assertive without being rude\"\n- \"This is too long — cut it in half while keeping the key points\"\n\nTakes about 10 seconds. Often results in a dramatically better email.",
+      },
+      {
+        type: 'practice',
+        title: 'Try it on a real email',
+        instruction: 'Think of an email you need to write today or this week — a request, a follow-up, or a reply you have been putting off. Use ChatGPT to write a first draft. Then review and tweak it until it sounds like you.',
+        prompt: '"Please write a [short/detailed] [professional/friendly/formal] email to [describe recipient] about [describe the subject]. The key points are: [your key points]. The tone should be [describe tone]. Keep it under [word count] words."',
+      },
+      {
+        type: 'quiz',
+        variant: 'better-prompt',
+        question: 'You need to write a follow-up email to a client you have not heard from in a week. Which prompt gets you a better result?',
+        options: [
+          { id: 'a', text: 'Write a follow-up email.', correct: false, explanation: 'Too vague — no context, no tone, no goal.' },
+          { id: 'b', text: 'Write a polite, brief follow-up email to a client I sent a proposal to one week ago. I have not heard back. I want to gently check in without being pushy. Keep it under 100 words and end with a clear, easy call to action.', correct: true, explanation: 'This has all the key ingredients: context, tone, goal, length, and what the end result should do.' },
+        ],
+        correctExplanation: 'Exactly right. Context, tone, and goal make the difference.',
+        incorrectExplanation: 'Think about what a human assistant would need to know to write this well.',
+      },
+      {
+        type: 'takeaway',
+        items: [
+          'Give AI the who, what, tone, and length — it handles the wording',
+          'Paste existing emails to adjust tone without rewriting from scratch',
+          'AI is especially useful for emails you have been putting off',
+          'Always read the output and adjust to match your natural voice',
+        ],
+      },
+      {
+        type: 'recap',
+        items: [
+          'Email is one of the highest-value uses of AI for everyday life',
+          'Brief AI clearly: who, what, tone, length',
+          'Improve your own drafts in one step by pasting and asking for a tone adjustment',
+        ],
+      },
+    ],
+  },
 };

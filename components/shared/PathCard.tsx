@@ -31,7 +31,7 @@ export function PathCard({ path, className }: PathCardProps) {
 
   return (
     <Link
-      href={`/paths/${path.id}`}
+      href={`/get-started`}
       className={cn(
         'group flex flex-col p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200',
         className
