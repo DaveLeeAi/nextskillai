@@ -267,6 +267,61 @@ export const fullLessonData: FullLesson = {
   ],
 };
 
+export const agentsPathModules: PathModule[] = [
+  {
+    id: 'agents-mod1',
+    title: 'What Agents Are',
+    description: 'Understand the nature and purpose of AI agents',
+    lessonIds: ['al1', 'al2'],
+    milestoneId: 'am1',
+  },
+  {
+    id: 'agents-mod2',
+    title: 'Tool-Connected AI',
+    description: 'Learn how agents access external tools and data',
+    lessonIds: ['al3', 'al4'],
+    milestoneId: 'am2',
+  },
+  {
+    id: 'agents-mod3',
+    title: 'Building Agent Workflows',
+    description: 'Design and run your first agent-assisted workflows',
+    lessonIds: ['al5', 'al6', 'al7'],
+    milestoneId: 'am3',
+  },
+  {
+    id: 'agents-mod4',
+    title: 'Human Oversight and Control',
+    description: 'Stay in control and verify agent output reliably',
+    lessonIds: ['al8', 'al9', 'al10'],
+    milestoneId: 'am4',
+  },
+];
+
+export const advancedPromptingModules: PathModule[] = [
+  {
+    id: 'adv-prompt-mod1',
+    title: 'Prompt Architecture',
+    description: 'Structure prompts as specifications, not questions',
+    lessonIds: ['ap1', 'ap2', 'ap3'],
+    milestoneId: 'apm1',
+  },
+  {
+    id: 'adv-prompt-mod2',
+    title: 'Advanced Techniques',
+    description: 'Chain-of-thought, persona design, and constraint engineering',
+    lessonIds: ['ap4', 'ap5', 'ap6'],
+    milestoneId: 'apm2',
+  },
+  {
+    id: 'adv-prompt-mod3',
+    title: 'Building Your Prompt Library',
+    description: 'Create and maintain a reusable personal prompt system',
+    lessonIds: ['ap7', 'ap8'],
+    milestoneId: 'apm3',
+  },
+];
+
 export const recentLessons = [
   {
     id: 'rl1',

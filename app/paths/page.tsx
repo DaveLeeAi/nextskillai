@@ -2,9 +2,11 @@ import Link from 'next/link';
 import { SiteLayout } from '@/components/layout/SiteLayout';
 import { Container } from '@/components/layout/Container';
 import { PathCardFull } from '@/components/shared/PathCardFull';
+import { AdvancedPathCard } from '@/components/shared/AdvancedPathCard';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { learningPaths } from '@/lib/data/paths';
-import { Map, CircleCheck as CheckCircle, Clock, Heart, ArrowRight, Users, Star } from 'lucide-react';
+import { advancedLearningPaths } from '@/lib/data/advancedPaths';
+import { Map, CircleCheck as CheckCircle, Clock, Heart, ArrowRight, Users, Star, Zap, ChevronRight } from 'lucide-react';
 
 const howPathsWork = [
   {
@@ -53,8 +55,16 @@ export default function PathsPage() {
                 href="#paths"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm transition-colors"
               >
-                Browse all paths
+                Beginner paths
                 <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="#advanced-paths"
+                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-700 border border-slate-200 hover:border-brand-300 hover:bg-brand-50 rounded-xl transition-colors"
+              >
+                <Zap className="w-4 h-4" />
+                Advanced paths
+                <ChevronRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/courses"
@@ -71,7 +81,7 @@ export default function PathsPage() {
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: '8', label: 'Guided paths', sub: 'For all experience levels' },
+              { value: '16', label: 'Guided paths', sub: 'Beginner to advanced' },
               { value: '1–4 wks', label: 'Average completion', sub: 'At just 10 min/day' },
               { value: '92%', label: 'Feel more confident', sub: 'After their first path' },
               { value: '28K+', label: 'People learning now', sub: 'Across all paths' },
@@ -133,7 +143,7 @@ export default function PathsPage() {
         <Container>
           <div className="text-center mb-12">
             <SectionHeading
-              eyebrow="All paths"
+              eyebrow="Beginner paths"
               title="Find the path that feels right for you"
               description="Whether you have never touched AI or want to build practical daily habits, there is a path designed for exactly where you are."
               align="center"
@@ -142,6 +152,41 @@ export default function PathsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {learningPaths.map(path => (
               <PathCardFull key={path.id} path={path} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section id="advanced-paths" className="py-16 md:py-24 bg-white border-t border-slate-100">
+        <Container>
+          <div className="text-center mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700 mb-5">
+              <Zap className="w-3.5 h-3.5" />
+              Advanced and intermediate — 2026 relevant
+            </div>
+            <SectionHeading
+              eyebrow="Advanced paths"
+              title="Take your AI skills to the next level"
+              description="Already comfortable with AI basics? These paths cover advanced workflows, agent-based AI, structured prompting, research synthesis, and team systems — all grounded in practical 2026 use cases."
+              align="center"
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+            {[
+              { label: 'Intermediate', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+              { label: 'Advanced', color: 'bg-rose-50 text-rose-700 border-rose-200' },
+            ].map(tier => (
+              <span key={tier.label} className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold ${tier.color}`}>
+                <CheckCircle className="w-3.5 h-3.5" />
+                {tier.label} paths available
+              </span>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {advancedLearningPaths.map(path => (
+              <AdvancedPathCard key={path.id} path={path} />
             ))}
           </div>
         </Container>

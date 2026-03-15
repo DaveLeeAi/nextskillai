@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Search, X, ChevronDown, BookOpen, Sparkles, TrendingUp } from 'lucide-react';
+import { Search, X, ChevronDown, BookOpen, Sparkles, TrendingUp, Zap, ArrowRight } from 'lucide-react';
 import { SiteLayout } from '@/components/layout/SiteLayout';
 import { Container } from '@/components/layout/Container';
 import { CourseCard } from '@/components/shared/CourseCard';
+import { AdvancedCourseCard } from '@/components/shared/AdvancedCourseCard';
 import { courses, courseCategories } from '@/lib/data/courses';
+import { advancedCourses, advancedCourseCategories } from '@/lib/data/advancedCourses';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -15,14 +17,20 @@ const sortOptions = [
   { id: 'shortest', label: 'Shortest First' },
 ];
 
+type Tier = 'beginner' | 'advanced';
+
 export default function CoursesPage() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
   const [showSort, setShowSort] = useState(false);
+  const [activeTier, setActiveTier] = useState<Tier>('beginner');
+  const [advancedCategory, setAdvancedCategory] = useState('all-advanced');
 
   const featuredCourses = useMemo(() => courses.filter(c => c.featured), []);
   const popularCourses = useMemo(() => courses.filter(c => c.popular && !c.featured).slice(0, 4), []);
+
+  const featuredAdvanced = useMemo(() => advancedCourses.filter(c => c.featured), []);
 
   const filteredCourses = useMemo(() => {
     let result = [...courses];
@@ -43,8 +51,28 @@ export default function CoursesPage() {
     return result;
   }, [search, activeCategory, sortBy]);
 
+  const filteredAdvanced = useMemo(() => {
+    let result = [...advancedCourses];
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(c =>
+        c.title.toLowerCase().includes(q) ||
+        c.description.toLowerCase().includes(q) ||
+        c.tags.some(t => t.toLowerCase().includes(q))
+      );
+    }
+    if (advancedCategory !== 'all-advanced') {
+      result = result.filter(c => c.category === advancedCategory);
+    }
+    if (sortBy === 'rating') result.sort((a, b) => b.rating - a.rating);
+    else if (sortBy === 'shortest') result.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
+    else result.sort((a, b) => b.reviewCount - a.reviewCount);
+    return result;
+  }, [search, advancedCategory, sortBy]);
+
   const activeSortLabel = sortOptions.find(s => s.id === sortBy)?.label ?? 'Sort';
   const isFiltered = search.trim() !== '' || activeCategory !== 'all';
+  const isAdvancedFiltered = search.trim() !== '' || advancedCategory !== 'all-advanced';
 
   return (
     <SiteLayout>
@@ -59,10 +87,9 @@ export default function CoursesPage() {
               Learn AI at your own pace
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed mb-8">
-              Short, simple lessons for everyday people — not tech experts.
-              Pick something that interests you and start right now.
+              Beginner lessons to advanced workflows — pick the level that fits where you are now.
             </p>
-            <div className="relative max-w-lg mx-auto">
+            <div className="relative max-w-lg mx-auto mb-6">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
                 type="text"
@@ -80,120 +107,250 @@ export default function CoursesPage() {
                 </button>
               )}
             </div>
+
+            <div className="inline-flex items-center gap-1 p-1 bg-slate-100 rounded-xl">
+              <button
+                onClick={() => setActiveTier('beginner')}
+                className={cn(
+                  'px-5 py-2 rounded-lg text-sm font-semibold transition-all',
+                  activeTier === 'beginner'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-700'
+                )}
+              >
+                Beginner
+              </button>
+              <button
+                onClick={() => setActiveTier('advanced')}
+                className={cn(
+                  'px-5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2',
+                  activeTier === 'advanced'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-700'
+                )}
+              >
+                <Zap className="w-3.5 h-3.5" />
+                Advanced
+              </button>
+            </div>
           </div>
         </Container>
       </section>
 
-      {!isFiltered && (
+      {activeTier === 'beginner' && (
         <>
-          <section className="py-10 bg-white border-b border-slate-100">
-            <Container>
-              <div className="flex items-center gap-2 mb-6">
-                <Sparkles className="w-5 h-5 text-brand-600" />
-                <h2 className="text-lg font-semibold text-slate-900">Recommended for Beginners</h2>
-              </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {featuredCourses.map(course => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </div>
-            </Container>
-          </section>
+          {!isFiltered && (
+            <>
+              <section className="py-10 bg-white border-b border-slate-100">
+                <Container>
+                  <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="w-5 h-5 text-brand-600" />
+                    <h2 className="text-lg font-semibold text-slate-900">Recommended for Beginners</h2>
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {featuredCourses.map(course => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </div>
+                </Container>
+              </section>
 
-          <section className="py-10 bg-slate-50/60 border-b border-slate-100">
+              <section className="py-10 bg-slate-50/60 border-b border-slate-100">
+                <Container>
+                  <div className="flex items-center gap-2 mb-6">
+                    <TrendingUp className="w-5 h-5 text-teal-600" />
+                    <h2 className="text-lg font-semibold text-slate-900">Popular This Week</h2>
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {popularCourses.map(course => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </div>
+                </Container>
+              </section>
+            </>
+          )}
+
+          <section className="py-12">
             <Container>
-              <div className="flex items-center gap-2 mb-6">
-                <TrendingUp className="w-5 h-5 text-teal-600" />
-                <h2 className="text-lg font-semibold text-slate-900">Popular This Week</h2>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {courseCategories.map(cat => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={cn(
+                        'px-4 py-2 rounded-full text-sm font-medium transition-all',
+                        activeCategory === cat.id
+                          ? 'bg-brand-600 text-white shadow-sm'
+                          : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                      )}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="relative flex-shrink-0">
+                  <button
+                    onClick={() => setShowSort(!showSort)}
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-xl hover:border-slate-300 transition"
+                  >
+                    {activeSortLabel}
+                    <ChevronDown className={cn('w-4 h-4 text-slate-400 transition-transform', showSort && 'rotate-180')} />
+                  </button>
+                  {showSort && (
+                    <div className="absolute right-0 top-full mt-1 w-44 bg-white rounded-xl border border-slate-200 shadow-lg py-1 z-10">
+                      {sortOptions.map(opt => (
+                        <button
+                          key={opt.id}
+                          onClick={() => { setSortBy(opt.id); setShowSort(false); }}
+                          className={cn(
+                            'w-full text-left px-4 py-2 text-sm transition-colors',
+                            sortBy === opt.id ? 'text-brand-600 font-semibold bg-brand-50' : 'text-slate-600 hover:bg-slate-50'
+                          )}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {popularCourses.map(course => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </div>
+
+              {filteredCourses.length > 0 ? (
+                <>
+                  <p className="text-sm text-slate-400 mb-6">
+                    {filteredCourses.length} lesson{filteredCourses.length !== 1 ? 's' : ''}
+                    {activeCategory !== 'all' && ` in ${courseCategories.find(c => c.id === activeCategory)?.label}`}
+                    {search && ` matching "${search}"`}
+                  </p>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    {filteredCourses.map(course => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-20">
+                  <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Search className="w-7 h-7 text-slate-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-2">No lessons found</h3>
+                  <p className="text-slate-500 mb-6">Try different keywords or browse all lessons</p>
+                  <button
+                    onClick={() => { setSearch(''); setActiveCategory('all'); }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                    Clear filters
+                  </button>
+                </div>
+              )}
             </Container>
           </section>
         </>
       )}
 
-      <section className="py-12">
-        <Container>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div className="flex items-center gap-2 flex-wrap">
-              {courseCategories.map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={cn(
-                    'px-4 py-2 rounded-full text-sm font-medium transition-all',
-                    activeCategory === cat.id
-                      ? 'bg-brand-600 text-white shadow-sm'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                  )}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
+      {activeTier === 'advanced' && (
+        <>
+          {!isAdvancedFiltered && (
+            <section className="py-10 bg-white border-b border-slate-100">
+              <Container>
+                <div className="flex items-center gap-2 mb-3">
+                  <Zap className="w-5 h-5 text-blue-600" />
+                  <h2 className="text-lg font-semibold text-slate-900">Featured Advanced Lessons</h2>
+                </div>
+                <p className="text-sm text-slate-500 mb-6">2026-relevant skills for intermediate and advanced AI users</p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {featuredAdvanced.map(course => (
+                    <AdvancedCourseCard key={course.id} course={course} />
+                  ))}
+                </div>
+              </Container>
+            </section>
+          )}
 
-            <div className="relative flex-shrink-0">
-              <button
-                onClick={() => setShowSort(!showSort)}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-xl hover:border-slate-300 transition"
-              >
-                {activeSortLabel}
-                <ChevronDown className={cn('w-4 h-4 text-slate-400 transition-transform', showSort && 'rotate-180')} />
-              </button>
-              {showSort && (
-                <div className="absolute right-0 top-full mt-1 w-44 bg-white rounded-xl border border-slate-200 shadow-lg py-1 z-10">
-                  {sortOptions.map(opt => (
+          <section className="py-12">
+            <Container>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {advancedCourseCategories.map(cat => (
                     <button
-                      key={opt.id}
-                      onClick={() => { setSortBy(opt.id); setShowSort(false); }}
+                      key={cat.id}
+                      onClick={() => setAdvancedCategory(cat.id)}
                       className={cn(
-                        'w-full text-left px-4 py-2 text-sm transition-colors',
-                        sortBy === opt.id ? 'text-brand-600 font-semibold bg-brand-50' : 'text-slate-600 hover:bg-slate-50'
+                        'px-4 py-2 rounded-full text-sm font-medium transition-all',
+                        advancedCategory === cat.id
+                          ? 'bg-blue-600 text-white shadow-sm'
+                          : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                       )}
                     >
-                      {opt.label}
+                      {cat.label}
                     </button>
                   ))}
                 </div>
-              )}
-            </div>
-          </div>
 
-          {filteredCourses.length > 0 ? (
-            <>
-              <p className="text-sm text-slate-400 mb-6">
-                {filteredCourses.length} lesson{filteredCourses.length !== 1 ? 's' : ''}
-                {activeCategory !== 'all' && ` in ${courseCategories.find(c => c.id === activeCategory)?.label}`}
-                {search && ` matching "${search}"`}
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                {filteredCourses.map(course => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
+                <div className="relative flex-shrink-0">
+                  <button
+                    onClick={() => setShowSort(!showSort)}
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-xl hover:border-slate-300 transition"
+                  >
+                    {activeSortLabel}
+                    <ChevronDown className={cn('w-4 h-4 text-slate-400 transition-transform', showSort && 'rotate-180')} />
+                  </button>
+                  {showSort && (
+                    <div className="absolute right-0 top-full mt-1 w-44 bg-white rounded-xl border border-slate-200 shadow-lg py-1 z-10">
+                      {sortOptions.map(opt => (
+                        <button
+                          key={opt.id}
+                          onClick={() => { setSortBy(opt.id); setShowSort(false); }}
+                          className={cn(
+                            'w-full text-left px-4 py-2 text-sm transition-colors',
+                            sortBy === opt.id ? 'text-blue-600 font-semibold bg-blue-50' : 'text-slate-600 hover:bg-slate-50'
+                          )}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </>
-          ) : (
-            <div className="text-center py-20">
-              <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Search className="w-7 h-7 text-slate-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-slate-800 mb-2">No lessons found</h3>
-              <p className="text-slate-500 mb-6">Try different keywords or browse all lessons</p>
-              <button
-                onClick={() => { setSearch(''); setActiveCategory('all'); }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-colors"
-              >
-                <X className="w-4 h-4" />
-                Clear filters
-              </button>
-            </div>
-          )}
-        </Container>
-      </section>
+
+              {filteredAdvanced.length > 0 ? (
+                <>
+                  <p className="text-sm text-slate-400 mb-6">
+                    {filteredAdvanced.length} lesson{filteredAdvanced.length !== 1 ? 's' : ''}
+                    {advancedCategory !== 'all-advanced' && ` in ${advancedCourseCategories.find(c => c.id === advancedCategory)?.label}`}
+                    {search && ` matching "${search}"`}
+                  </p>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    {filteredAdvanced.map(course => (
+                      <AdvancedCourseCard key={course.id} course={course} />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-20">
+                  <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Search className="w-7 h-7 text-slate-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-2">No lessons found</h3>
+                  <p className="text-slate-500 mb-6">Try different keywords or browse all advanced lessons</p>
+                  <button
+                    onClick={() => { setSearch(''); setAdvancedCategory('all-advanced'); }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                    Clear filters
+                  </button>
+                </div>
+              )}
+            </Container>
+          </section>
+        </>
+      )}
 
       <section className="py-16 bg-gradient-to-br from-brand-600 to-brand-700">
         <Container>
@@ -204,13 +361,23 @@ export default function CoursesPage() {
             <p className="text-brand-100 mb-8 text-lg leading-relaxed">
               Our guided paths walk you through everything in the right order — no guessing, no overwhelm.
             </p>
-            <Link
-              href="/paths"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors shadow-sm"
-            >
-              <Sparkles className="w-4 h-4" />
-              Explore Learning Paths
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/paths"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors shadow-sm"
+              >
+                <Sparkles className="w-4 h-4" />
+                Browse Beginner Paths
+              </Link>
+              <Link
+                href="/paths#advanced-paths"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-brand-700/50 border border-brand-500/50 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors"
+              >
+                <Zap className="w-4 h-4" />
+                Browse Advanced Paths
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
